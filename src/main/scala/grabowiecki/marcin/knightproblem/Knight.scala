@@ -15,6 +15,17 @@ object Knight {
     Coordinates(2, -1),
     Coordinates(-2, -1))
 
+  //tood add
+  //@tailrec
+  def moveTo(checkBoard: CheckBoard, coordinates: Coordinates): Unit = {
+    checkBoard.visit(coordinates)
+    getPossibleMovesFor(coordinates, checkBoard)
+      //.par
+      .foreach(possibleMove => {
+      moveTo(new CheckBoard(checkBoard), possibleMove)
+    })
+  }
+
   def getPossibleMovesFor(coordinate: Coordinates, onCheckBoard: CheckBoard): List[Coordinates] = {
     possibleMoves
       .map(possibleMove=>coordinate.add(possibleMove))
