@@ -1,7 +1,6 @@
 package grabowiecki.marcin.knightproblem
 
 import scala.annotation.tailrec
-
 /**
  * @author ${user.name}
  */
@@ -22,8 +21,9 @@ object App {
     printCheckBoardOnComplete(checkBoard)
     Knight
       .getPossibleMovesFor(coordinates, checkBoard)
+      //.par
       .foreach(possibleMove => {
-          moveTo(new CheckBoard(checkBoard), possibleMove)
+        moveTo(new CheckBoard(checkBoard), possibleMove)
       })
   }
 
