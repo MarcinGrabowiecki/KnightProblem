@@ -19,7 +19,8 @@ case class CheckBoard (val size: Position){
     checkBoardMatrix(position.x)(position.y) = counter
     counter=counter+1
     if(isComplete) {
-      //printCheckBoard
+      println()
+      printCheckBoard
       CheckBoard.solutions=CheckBoard.solutions+1
     }
   }
@@ -27,14 +28,13 @@ case class CheckBoard (val size: Position){
   def this(oldCheckBoard: CheckBoard)={
     this(oldCheckBoard.size)
     counter=oldCheckBoard.counter
-//    for(x <- 0 to size.x-1){
-//      checkBoardMatrix(x)=util.Arrays.copyOf(oldCheckBoard.checkBoardMatrix(x),height)
-//    }
 
-    for(x <- 0 to size.x-1;
-        y <- 0 to size.y-1)
-          checkBoardMatrix(x)(y)=oldCheckBoard.checkBoardMatrix(x)(y)
-  }
+    //10% faster than copyin element by element
+    for(x <- 0 until size.x){
+      checkBoardMatrix(x)=util.Arrays.copyOf(oldCheckBoard.checkBoardMatrix(x),height)
+    }
+
+    }
 
   def printCheckBoard={
     println(CheckBoard.solutions+ "---\t"*size.y)
