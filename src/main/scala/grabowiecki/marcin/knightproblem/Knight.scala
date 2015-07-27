@@ -6,18 +6,18 @@ package grabowiecki.marcin.knightproblem
 object Knight {
 
   private val possibleMoves = List(
-    Coordinates(1, 2),
-    Coordinates(-1, 2),
-    Coordinates(1, -2),
-    Coordinates(-1, -2),
-    Coordinates(2, 1),
-    Coordinates(-2, 1),
-    Coordinates(2, -1),
-    Coordinates(-2, -1))
+    Position(1, 2),
+    Position(-1, 2),
+    Position(1, -2),
+    Position(-1, -2),
+    Position(2, 1),
+    Position(-2, 1),
+    Position(2, -1),
+    Position(-2, -1))
 
   //tood add
   //@tailrec
-  def moveTo(checkBoard: CheckBoard, coordinates: Coordinates): Unit = {
+  def moveTo(checkBoard: CheckBoard, coordinates: Position): Unit = {
     checkBoard.visit(coordinates)
     getPossibleMovesFor(coordinates, checkBoard)
       //.par
@@ -26,13 +26,13 @@ object Knight {
     })
   }
 
-  def getPossibleMovesFor(coordinate: Coordinates, onCheckBoard: CheckBoard): List[Coordinates] = {
+  def getPossibleMovesFor(coordinate: Position, onCheckBoard: CheckBoard): List[Position] = {
     possibleMoves
       .map(possibleMove=>coordinate.add(possibleMove))
       .filter(possibleMove=>validateMove(possibleMove, onCheckBoard))
   }
 
-  private def validateMove(moveTo: Coordinates, checkBoard: CheckBoard): Boolean = {
+  private def validateMove(moveTo: Position, checkBoard: CheckBoard): Boolean = {
     if (moveTo.x < 0 || moveTo.y < 0) return false
     if (moveTo.x >= checkBoard.width||moveTo.y >= checkBoard.height) return false
     if (checkBoard.getVisitOrder(moveTo) > 0) return false

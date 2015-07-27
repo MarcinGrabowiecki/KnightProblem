@@ -1,6 +1,6 @@
 package samples
 
-import grabowiecki.marcin.knightproblem.{Coordinates, CheckBoard}
+import grabowiecki.marcin.knightproblem.{Position, CheckBoard}
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.specs2.mutable._
@@ -21,7 +21,7 @@ import org.specs2.runner._
 @RunWith(classOf[JUnitRunner])
 class MySpecTest extends Specification {
   "CheckBoard" should {
-    val cb=new CheckBoard(Coordinates(10,10))
+    val cb=new CheckBoard(Position(10,10))
     "contain 11 characters" in {
       "Hello world" must have size(11)
     }

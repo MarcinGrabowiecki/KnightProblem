@@ -5,7 +5,7 @@ import java.util
 /**
  * Created by m on 2015-07-25.
  */
-case class CheckBoard (val size: Coordinates){
+case class CheckBoard (val size: Position){
 
   private var counter=1;
   private val checkBoardMatrix=Array.ofDim[Int](size.x,size.y)
@@ -13,20 +13,20 @@ case class CheckBoard (val size: Coordinates){
   val width = size.x
   val height = size.y
 
-  def getVisitOrder(coordinates: Coordinates):Int = checkBoardMatrix(coordinates.x)(coordinates.y)
+  def getVisitOrder(coordinates: Position):Int = checkBoardMatrix(coordinates.x)(coordinates.y)
 
-  def visit(coordinates: Coordinates) = {
-    checkBoardMatrix(coordinates.x)(coordinates.y) = counter
+  def visit(position: Position) = {
+    checkBoardMatrix(position.x)(position.y) = counter
     counter=counter+1
     if(isComplete) {
-      printCheckBoard
+      //printCheckBoard
       CheckBoard.solutions=CheckBoard.solutions+1
     }
   }
 
   def this(oldCheckBoard: CheckBoard)={
     this(oldCheckBoard.size)
-    this.counter=oldCheckBoard.counter
+    counter=oldCheckBoard.counter
 //    for(x <- 0 to size.x-1){
 //      checkBoardMatrix(x)=util.Arrays.copyOf(oldCheckBoard.checkBoardMatrix(x),height)
 //    }
