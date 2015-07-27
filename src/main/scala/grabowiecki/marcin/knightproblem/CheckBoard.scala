@@ -18,6 +18,10 @@ case class CheckBoard (val size: Coordinates){
   def visit(coordinates: Coordinates) = {
     checkBoardMatrix(coordinates.x)(coordinates.y) = counter
     counter=counter+1
+    if(isComplete) {
+      printCheckBoard
+      CheckBoard.solutions=CheckBoard.solutions+1
+    }
   }
 
   def this(oldCheckBoard: CheckBoard)={
@@ -33,7 +37,7 @@ case class CheckBoard (val size: Coordinates){
   }
 
   def printCheckBoard={
-    println("---\t"*size.y)
+    println(CheckBoard.solutions+ "---\t"*size.y)
     for( row <- checkBoardMatrix) {
       for( elem <- row) print(f"${elem}\t")
       println
@@ -45,4 +49,8 @@ case class CheckBoard (val size: Coordinates){
     for { row  <- checkBoardMatrix ; elem <- row } yield if(elem==0) return false
     true
   }
+}
+
+object CheckBoard{
+  private var solutions=0;
 }
